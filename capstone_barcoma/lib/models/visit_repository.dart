@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:capstone_barcoma/models/visit.dart';
-import 'package:capstone_barcoma/data/seed_data.dart';
+import 'package:capstone_barcoma/data/dummy_data.dart';
 
 abstract class VisitRepository {
   Stream<List<Visit>> watchWaiting();
