@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:capstone_barcoma/models/visit.dart';
 import 'package:capstone_barcoma/data/dummy_data.dart';
 
@@ -20,11 +19,9 @@ abstract class VisitRepository {
 }
 
 class InMemoryVisitRepository implements VisitRepository {
-  InMemoryVisitRepository([List<Visit> initial = const []])
-    : _visits = [...initial];
+  InMemoryVisitRepository([List<Visit> initial = const []]) : _visits = [...initial];
 
-  factory InMemoryVisitRepository.seeded() =>
-    InMemoryVisitRepository(buildSeedVisits());
+  factory InMemoryVisitRepository.seeded() => InMemoryVisitRepository(buildSeedVisits());
 
   final List<Visit> _visits;
   final StreamController<void> _changes = StreamController<void>.broadcast();
@@ -41,8 +38,7 @@ class InMemoryVisitRepository implements VisitRepository {
 
   @override
   Stream<List<Visit>> watchWaiting() => _watch(() {
-    return _visits.where((v) => v.isWaiting).toList()
-    ..sort((a, b) => a.timestamp.compareTo(b.timestamp));
+    return _visits.where((v) => v.isWaiting).toList() ..sort((a, b) => a.timestamp.compareTo(b.timestamp));
   });
 
   @override

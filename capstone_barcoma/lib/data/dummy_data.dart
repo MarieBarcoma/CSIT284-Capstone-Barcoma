@@ -14,8 +14,7 @@ const List<String> symptoms = [
 List<Visit> buildSeedVisits() {
   final now = DateTime.now();
   DateTime minutesAgo(int m) => now.subtract(Duration(minutes: m));
-  DateTime daysAgo(int d, {int plusMinutes = 0}) =>
-      now.subtract(Duration(days: d)).add(Duration(minutes: plusMinutes));
+  DateTime daysAgo(int d, {int plusMinutes = 0}) => now.subtract(Duration(days: d)).add(Duration(minutes: plusMinutes));
 
   return [
     Visit(
@@ -26,6 +25,7 @@ List<Visit> buildSeedVisits() {
       note: 'Since 2nd period',
       timestamp: minutesAgo(25),
     ),
+    
     Visit(
       id: 'v2',
       studentId: '23-1102-334',
@@ -34,6 +34,7 @@ List<Visit> buildSeedVisits() {
       note: 'Scraped knee during PE',
       timestamp: minutesAgo(18),
     ),
+    
     Visit(
       id: 'v3',
       studentId: '21-0987-552',
@@ -41,6 +42,7 @@ List<Visit> buildSeedVisits() {
       symptom: 'Dizziness',
       timestamp: minutesAgo(11),
     ),
+    
     Visit(
       id: 'v4',
       studentId: '24-0213-469',
@@ -49,6 +51,7 @@ List<Visit> buildSeedVisits() {
       note: 'Felt hot after lunch',
       timestamp: minutesAgo(7),
     ),
+    
     Visit(
       id: 'v5',
       studentId: '23-0778-905',
@@ -56,7 +59,6 @@ List<Visit> buildSeedVisits() {
       symptom: 'Menstrual cramps',
       timestamp: minutesAgo(3),
     ),
-
 
     Visit(
       id: 'v6',
@@ -67,6 +69,7 @@ List<Visit> buildSeedVisits() {
       status: VisitStatus.attended,
       attendedAt: minutesAgo(80),
     ),
+    
     Visit(
       id: 'v7',
       studentId: '21-1234-567',
@@ -76,6 +79,7 @@ List<Visit> buildSeedVisits() {
       status: VisitStatus.attended,
       attendedAt: minutesAgo(140),
     ),
+    
     Visit(
       id: 'v8',
       studentId: '24-1189-031',
@@ -85,6 +89,7 @@ List<Visit> buildSeedVisits() {
       status: VisitStatus.attended,
       attendedAt: minutesAgo(60),
     ),
+    
     Visit(
       id: 'v9',
       studentId: '22-2045-612',
@@ -105,6 +110,7 @@ List<Visit> buildSeedVisits() {
       status: VisitStatus.attended,
       attendedAt: daysAgo(6, plusMinutes: 10),
     ),
+    
     Visit(
       id: 'v11',
       studentId: '21-1234-567',
@@ -115,6 +121,7 @@ List<Visit> buildSeedVisits() {
       status: VisitStatus.attended,
       attendedAt: daysAgo(13, plusMinutes: 15),
     ),
+    
     Visit(
       id: 'v12',
       studentId: '23-1102-334',

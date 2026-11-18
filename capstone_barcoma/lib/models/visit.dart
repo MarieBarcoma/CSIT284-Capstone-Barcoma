@@ -24,13 +24,13 @@ class Visit {
   bool get isWaiting => status == VisitStatus.waiting;
 
   Visit markAttended(DateTime when) => Visit(
-        id: id,
-        studentId: studentId,
-        studentName: studentName,
-        symptom: symptom,
-        timestamp: timestamp,
-        note: note,
-        status: VisitStatus.attended,
-        attendedAt: when,
-      );
+    id: id,
+    studentId: studentId,
+    studentName: studentName,
+    symptom: symptom,
+    timestamp: timestamp,
+    note: note,
+    status: VisitStatus.attended,
+    attendedAt: when,
+  );
 }
