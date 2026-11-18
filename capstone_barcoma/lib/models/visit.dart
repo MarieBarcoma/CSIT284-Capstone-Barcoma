@@ -1,7 +1,5 @@
 enum VisitStatus { waiting, attended }
 
-/// One clinic visit logged by a student.
-/// Matches the Firestore document shape we'll use in Week 2.
 class Visit {
   const Visit({
     required this.id,
@@ -19,13 +17,12 @@ class Visit {
   final String studentName;
   final String symptom;
   final String note;
-  final DateTime timestamp; // when the student logged the visit
+  final DateTime timestamp;
   final VisitStatus status;
-  final DateTime? attendedAt; // null until the nurse marks it attended
+  final DateTime? attendedAt;
 
   bool get isWaiting => status == VisitStatus.waiting;
 
-  /// Returns a copy of this visit marked as attended.
   Visit markAttended(DateTime when) => Visit(
         id: id,
         studentId: studentId,
