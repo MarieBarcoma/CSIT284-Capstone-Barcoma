@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:capstone_barcoma/screens/home_shell.dart';
 
 void main() {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:capstone_barcoma/app_state.dart';
 import 'package:capstone_barcoma/screens/log_visit_screen.dart';
 import 'package:capstone_barcoma/screens/my_visits_screen.dart';

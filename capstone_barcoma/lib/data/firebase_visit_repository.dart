@@ -33,8 +33,7 @@ class FirebaseVisitRepository implements VisitRepository {
       studentName: json['studentName'] as String? ?? '',
       symptom: json['symptom'] as String? ?? '',
       note: json['note'] as String? ?? '',
-      timestamp: DateTime.tryParse(json['timestamp'] as String? ?? '') ??
-        DateTime.now(),
+      timestamp: DateTime.tryParse(json['timestamp'] as String? ?? '') ?? DateTime.now(),
       status: json['status'] == 'attended'
         ? VisitStatus.attended
         : VisitStatus.waiting,

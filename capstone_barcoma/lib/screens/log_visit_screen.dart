@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+
 import 'package:capstone_barcoma/app_state.dart';
 import 'package:capstone_barcoma/data/dummy_data.dart';
 
+/// Student fills in ID, name and symptom, then submits.
 class LogVisitScreen extends StatefulWidget {
   const LogVisitScreen({super.key, required this.onLogged});
+
+  /// Called after a successful submit (the shell switches to My Visits).
   final VoidCallback onLogged;
 
   @override
@@ -17,7 +21,7 @@ class _LogVisitScreenState extends State<LogVisitScreen> {
   final _noteController = TextEditingController();
 
   String? _symptom;
-  int _symptomResetKey = 0;
+  int _symptomResetKey = 0; // changing this rebuilds the dropdown empty
   bool _submitting = false;
 
   @override
@@ -28,23 +32,36 @@ class _LogVisitScreenState extends State<LogVisitScreen> {
     super.dispose();
   }
 
-  String? Function(String?) _required(String label) => (value) => (value == null || value.trim().isEmpty) ? '$label is required' : null;
+  String? Function(String?) _required(String label) =>
+      (value) => (value == null || value.trim().isEmpty)
+          ? '$label is required'
+          : null;
 
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
     setState(() => _submitting = true);
 
     final studentId = _idController.text.trim();
-    await visitRepo.addVisit(
-      studentId: studentId,
-      studentName: _nameController.text.trim(),
-      symptom: _symptom!,
-      note: _noteController.text.trim(),
-    );
+    try {
+      await visitRepo.addVisit(
+        studentId: studentId,
+        studentName: _nameController.text.trim(),
+        symptom: _symptom!,
+        note: _noteController.text.trim(),
+      );
+    } catch (e) {
+      if (!mounted) return;
+      setState(() => _submitting = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Could not save. Check your internet.')),
+      );
+      return;
+    }
     if (!mounted) return;
 
     currentStudentId.value = studentId;
 
+    // Keep ID and name filled in; clear the visit-specific fields.
     _noteController.clear();
     setState(() {
       _symptom = null;
@@ -67,6 +84,15 @@ class _LogVisitScreenState extends State<LogVisitScreen> {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
+        // Clinic logo
+        Center(
+          child: Image.asset(
+            'assets/images/clinic_logo.png',
+            height: 110,
+          ),
+        ),
+        const SizedBox(height: 16),
+
         Text('How are you feeling?', style: textTheme.titleLarge),
         const SizedBox(height: 4),
         Text(
@@ -108,11 +134,11 @@ class _LogVisitScreenState extends State<LogVisitScreen> {
                 ),
                 items: [
                   for (final s in symptoms)
-                  DropdownMenuItem(value: s, child: Text(s)),
+                    DropdownMenuItem(value: s, child: Text(s)),
                 ],
                 onChanged: (value) => setState(() => _symptom = value),
                 validator: (value) =>
-                  value == null ? 'Please choose a symptom' : null,
+                    value == null ? 'Please choose a symptom' : null,
               ),
               const SizedBox(height: 16),
               TextFormField(

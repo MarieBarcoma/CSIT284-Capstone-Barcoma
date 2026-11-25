@@ -88,5 +88,4 @@ class InMemoryVisitRepository implements VisitRepository {
   }
 }
 
-bool _isSameDay(DateTime a, DateTime b) =>
-    a.year == b.year && a.month == b.month && a.day == b.day;
+bool _isSameDay(DateTime a, DateTime b) => a.year == b.year && a.month == b.month && a.day == b.day;
